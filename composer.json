@@ -1,0 +1,5 @@
+{
+    "require-dev": {
+        "helgesverre/domain-availability": "^1.5"
+    }
+}
