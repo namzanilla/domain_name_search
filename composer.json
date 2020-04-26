@@ -1,5 +1,8 @@
 {
     "require-dev": {
         "helgesverre/domain-availability": "^1.5"
+    },
+    "require": {
+        "drupol/phpermutations": "^1.3"
     }
 }
