@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-require __DIR__.'/../_helpers/Domain.class.php';
-
 $domain = getopt('d:')['d'] ?? null;
 require __DIR__.'/../../vendor/autoload.php';
 
