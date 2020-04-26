@@ -20,6 +20,9 @@ if (isset($options->prefix)) {
   $options->length -= strlen($options->postfix);
 }
 
+$tmp_filename = date('Y-m-d_h:i:s').'.log';
+$file = __DIR__.'/../../tmp/'.$tmp_filename;
+exec("touch $file");
 
 require __DIR__.'./../../vendor/autoload.php';
 
@@ -51,6 +54,7 @@ foreach ($permutations->generator() as $permutation) {
 
   if ("Domain $domain is already taken!" !== $output[0]) {
     echo $domain,PHP_EOL;
+    exec("echo $domain >> ".$file);
   }
 
   unset($output);
