@@ -5,6 +5,7 @@ declare(strict_types=1);
 $longopts  = array(
   "length::",     // Required value
   "prefix::",    // Optional value
+  "postfix::",    // Optional value
   "tld::",    // Optional value
   "noNumbers",        // No value
 //  "opt",           // No value
@@ -15,7 +16,10 @@ $options = (object)$options;
 
 if (isset($options->prefix)) {
   $options->length -= strlen($options->prefix);
+} elseif (isset($options->postfix)) {
+  $options->length -= strlen($options->postfix);
 }
+
 
 require __DIR__.'./../../vendor/autoload.php';
 
@@ -33,10 +37,14 @@ if (isset($options->noNumbers)) {
 $permutations = new Permutations($dataset, $options->length);
 
 foreach ($permutations->generator() as $permutation) {
-  $domain = implode('', $permutation).'.'.$options->tld;
+  $domain_name = implode('', $permutation);
 
   if (isset($options->prefix)) {
-    $domain = $options->prefix.$domain;
+    $domain = $options->prefix.$domain_name.'.'.$options->tld;
+  } elseif (isset($options->postfix)) {
+    $domain = $domain_name.$options->postfix.'.'.$options->tld;
+  } else {
+    $domain = $domain_name.'.'.$options->tld;
   }
 
   exec('php '.__DIR__.'/check.php -d'.$domain, $output);
