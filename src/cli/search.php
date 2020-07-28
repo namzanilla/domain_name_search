@@ -32,7 +32,7 @@ $letters = range('a', 'z');
 $numbers = range(0, 9);
 
 if (isset($options->noNumbers)) {
-  $dataset = array_merge($letters, $letters);
+  $dataset = $letters;
 } else {
   $dataset = array_merge($letters, $numbers);
 }
